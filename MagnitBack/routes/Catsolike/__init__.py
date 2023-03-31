@@ -85,7 +85,7 @@ def get_lines_list():
 
 #region Points
 @catsolike_route.route('/points', methods=['GET'])
-# @is_logged
+# @is_logged #
 @insert_checker('line_id')
 def points_list():
     points = db.get_points_by_line(request.args.get('line_id'))
