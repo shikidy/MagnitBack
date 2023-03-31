@@ -15,7 +15,7 @@ app.register_blueprint(blueprint=shikidy_route)
 CORS(app, supports_credentials=True)
 app.config['SECRET_KEY'] = SECRET_CONFIG
 app.config.update(SESSION_COOKIE_SAMESITE="None", SESSION_COOKIE_SECURE=True, SECURE=True)
-# app.config['SERVER_NAME'] = DOMAIN
+app.config['SERVER_NAME'] = DOMAIN
 app.config['APPLICATION_ROOT'] = '/'
 app.config['SESSION_COOKIE_DOMAIN'] = False
 
