@@ -40,7 +40,8 @@ def insert_checker(*values_tags: tuple):
                 return jsonify(err_response), 400
             try:
                 return  function(*args, **kwargs)
-            except:
+            except Exception as err:
+                print(err)
                 return jsonify({'is_error': True, 'error_texts': ['Error on request']}), 400
         return wrapper
     return decorator

@@ -7,11 +7,12 @@ from decorators import is_logged, insert_checker
 from functools import wraps
 
 from secret import SECRET_CONFIG, DOMAIN
-from routes import shikidy_route
+from routes import shikidy_route, catsolike_route
 
 
 app = Flask(__name__)
 app.register_blueprint(blueprint=shikidy_route)
+app.register_blueprint(blueprint=catsolike_route)
 CORS(app, supports_credentials=True)
 app.config['SECRET_KEY'] = SECRET_CONFIG
 app.config.update(SESSION_COOKIE_SAMESITE="None", SESSION_COOKIE_SECURE=True, SECURE=True)
