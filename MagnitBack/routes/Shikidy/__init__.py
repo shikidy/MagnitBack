@@ -13,7 +13,7 @@ from .db import DbWorker
 from decorators import is_logged, insert_checker
 
 
-shikidy_route = Blueprint('shikidy', __name__)#, subdomain='shikidy')
+shikidy_route = Blueprint('shikidy', __name__, subdomain='shikidy')
 CORS(shikidy_route,  supports_credentials=True)
 db = DbWorker('magnit')
 
