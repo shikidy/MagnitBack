@@ -54,6 +54,14 @@ def get_project_list():
         ))
     return jsonify(to_json)
 
+@catsolike_route.route('/project_remove', methods=['GET'])
+@insert_checker('id')
+def del_project():
+    db.delete_project(request.args.get('id'))
+    return jsonify({
+            'is_error' : False,
+            'error_texts' : []
+        })
 #endregion
 
 #region Area
@@ -69,6 +77,14 @@ def get_areas_list():
         ))
     return jsonify(to_json)
 
+@catsolike_route.route("/area_remove", methods=['GET'])
+@insert_checker('id')
+def dek_area():
+    db.delete_area(request.args.get('id'))
+    return jsonify({
+            'is_error' : False,
+            'error_texts' : []
+        })
 #endregion
 
 #region Lines

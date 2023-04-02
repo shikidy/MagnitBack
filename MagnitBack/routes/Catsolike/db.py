@@ -74,6 +74,30 @@ class DbWorker():
             self.cursor.execute('SELECT * FROM point_result WHERE point_id = %s', (point_id,))
             return self.cursor.fetchall()
         
+    # Создание проекта
+    def create_project(self, user_id: int, name: str):
+        with self.connection:
+            self.cursor.execute("SELECT id FROM projects ORDER BY id DESC limit 1")
+            data = self.cursor.fetchone()['id'] + 1
+
+            self.cursor.execute("INSERT INTO projects (id, creator_id, name) VALUES (%s, %s, %s)", (data, user_id, name))
+    
+    # Удаление проекта
+    def delete_project(self, id: int):
+        with self.connection:
+            self.cursor.execute("DELETE FROM projects WHERE id = %s", (id, ))
+
+    # Создание территории
+    def create_area(self, project_id: int, name: str):
+        with self.connection:
+            self.cursor.execute("SELECT id FROM areas ORDER BY id DESC limit 1")
+            data = self.cursor.fetchone()['id'] + 1
+            self.cursor.execute("INSERT INTO areas (id, project_id, name) VALUES (%s, %s, %s)", (data, project_id, name))
+
+    # Удаление территории
+    def delete_area(self, id: int):
+        with self.connection:
+            self.cursor.execute("DELETE FROM areas WHERE id = %s", (id,))  
 if __name__ == '__main__':
     a = DbWorker()
     print(a.get_areas_by_project(0))
