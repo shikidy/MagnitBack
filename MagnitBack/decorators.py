@@ -11,9 +11,9 @@ from functools import wraps
 def is_logged(func):
     @wraps(func)
     def decorated_function(*args, **kwargs):
-        # if not 'logged' in session.keys():
-        #     flash('Login Expired')
-        #     return jsonify({'is_error': True, 'error_texts': ['Login Expired']}), 403
+        if not 'logged' in session.keys():
+            flash('Login Expired')
+            return jsonify({'is_error': True, 'error_texts': ['Login Expired']}), 403
         return func(*args, **kwargs)
     return decorated_function    
 
