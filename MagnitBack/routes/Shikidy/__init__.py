@@ -100,7 +100,7 @@ def add_area():
             'error_texts' : []
         })
 
-@shikidy_route.route("/del_area", methods=['GET'])
+@shikidy_route.route("/area_remove", methods=['GET'])
 @insert_checker('id')
 def dek_area():
     db.delete_area(request.args.get('id'))
