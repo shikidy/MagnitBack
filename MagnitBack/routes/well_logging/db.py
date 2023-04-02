@@ -46,7 +46,7 @@ class DbWorker():
 
     def get_projects_by_user(self, user_id: int):
         with self.connection:
-            self.cursor.execute('SELECT * FROM Projects WHERE user_id = %s', (user_id,))
+            self.cursor.execute('SELECT * FROM Projects, users_projects WHERE users_projects.user_id = %s and projects.id_project = users_projects.project_id', (user_id,))
             return self.cursor.fetchall()
         
     def get_user_by_log_pas(self, login: str, password: str):
