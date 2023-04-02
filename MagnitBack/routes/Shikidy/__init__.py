@@ -38,7 +38,8 @@ def login():
     session.modified = True
     return jsonify({
             'is_error' : False,
-            'error_texts' : []
+            'error_texts' : [],
+            'role' : user['role']
         })
 #endregion
 
