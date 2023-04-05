@@ -107,6 +107,12 @@ class DbWorker():
     def delete_area(self, id: int):
         with self.connection:
             self.cursor.execute("DELETE FROM areas WHERE id = %s", (id,))   
+            
+    def get_all_points_by_area(self, line_id: int):
+        with self.connection:
+            self.cursor.execute("SELECT DISTINCT  points.id, points.line_id, points.x, points.y, (SELECT AVG(T_data) from point_result WHERE point_result.point_id = points.id) as t FROM points,  lines, areas, point_result WHERE  %s = lines.area_id and lines.id =  points.line_id", (line_id,))
+            return self.cursor.fetchall()
+        
 if __name__ == '__main__':
     a = DbWorker()
     print(a.get_areas_by_project(0))

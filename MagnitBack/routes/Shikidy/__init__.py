@@ -13,11 +13,14 @@ from .db import DbWorker
 from decorators import is_logged, insert_checker
 
 
-shikidy_route = Blueprint('shikidy', __name__, subdomain='shikidy')
+shikidy_route = Blueprint('shikidy', __name__)#, subdomain='shikidy')
 CORS(shikidy_route,  supports_credentials=True)
 db = DbWorker('magnit')
 
 #region Login
+@shikidy_route.route('/role')
+def get_role():
+    return jsonify({'role' : session['role']})
 @shikidy_route.route('/login')
 @insert_checker('login', 'password')
 def login():
@@ -149,4 +152,13 @@ def point_list():
         to_json.append(dict(**el
         ))
     return jsonify(to_json)
+
+@shikidy_route.route('/points_by_area', methods=['GET'])
+@insert_checker('area_id')
+def all_points():
+    points = db.get_all_points_by_area(request.args.get('area_id'))
+    res = []
+    for el in points:
+        res.append(el)
+    return jsonify(res)
 #endregion
