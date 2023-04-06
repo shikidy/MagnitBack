@@ -100,7 +100,8 @@ def get_pickets_list():
             electric_resistance=el['electric_resistance'],
             layer_density=el['layer_density'],
             gamma_ray=el['gamma_ray'],
-            magnetic_field=el['magnetic_field']
+            magnetic_field=el['magnetic_field'],
+            creation_date=el['creation_date']
         ))
     return jsonify(to_json)
 #endregion
